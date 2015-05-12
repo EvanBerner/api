@@ -8,7 +8,7 @@ shared_examples_for('a project policy subclass') do |record_symbol|
       it "allows you to read #{record_symbol.to_s.pluralize} if one of your group’s roles has the permission for the project" do
         staff = create(:staff)
         project = create(:project)
-        staff.groups.create!(projects: [project], role: create(:role))
+        Membership.create!(project: project, role: build(:role), group: staff.groups.create)
         record = create(record_symbol, project: project)
 
         expect(described_class).to permit(staff, record)
@@ -17,7 +17,7 @@ shared_examples_for('a project policy subclass') do |record_symbol|
       it "disallows on related #{record_symbol} with insufficient permissions" do
         staff = create(:staff)
         project = create(:project)
-        staff.groups.create!(projects: [project], role: create(:role, permissions: {}))
+        Membership.create!(project: project, role: build(:role, permissions: {}), group: staff.groups.create)
         record = create(record_symbol, project: project)
 
         expect(described_class).not_to permit(staff, record)

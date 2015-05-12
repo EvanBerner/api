@@ -7,7 +7,6 @@
 #  updated_at  :datetime
 #  name        :string
 #  description :text
-#  role_id     :integer
 #
 
 class GroupSerializer < ApplicationSerializer

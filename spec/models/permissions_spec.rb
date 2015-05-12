@@ -4,10 +4,7 @@ describe Permissions do
   it 'permits a user with permission for a model type' do
     staff = create(:staff)
     project = create(:project)
-    staff.groups << create(:group,
-      role: create(:role, permissions: { projects: ['write'] }),
-      projects: [project]
-    )
+    Membership.create!(project: project, role: create(:role, permissions: { projects: ['write'] }), group: staff.groups.create)
 
     expect(Permissions.new(user: staff, object: project).allow?('write')).to be true
   end
@@ -15,7 +12,7 @@ describe Permissions do
   it 'denies a user without permission' do
     staff = create(:staff)
     project = create(:project)
-    staff.groups << Group.create(projects: [project])
+    Membership.create!(project: project, role: create(:role, permissions: {}), group: staff.groups.create)
 
     expect(Permissions.new(user: staff, object: project).allow?('write')).to be false
   end

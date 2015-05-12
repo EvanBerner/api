@@ -7,6 +7,7 @@
 #  updated_at :datetime
 #  group_id   :integer
 #  project_id :integer
+#  role_id    :integer
 #
 # Indexes
 #
@@ -17,4 +18,5 @@
 class Membership < ActiveRecord::Base
   belongs_to :group
   belongs_to :project
+  belongs_to :role
 end

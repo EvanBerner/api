@@ -37,7 +37,7 @@ describe ProjectPolicy do
       it 'allows you to read projects if one of your group’s roles has the permission' do
         staff = create(:staff)
         project = create(:project)
-        staff.groups.create!(projects: [project], role: create(:role))
+        Membership.create!(project: project, role: build(:role), group: staff.groups.create)
 
         expect(subject).to permit(staff, project)
       end
@@ -45,7 +45,7 @@ describe ProjectPolicy do
       it 'disallows on related project with insufficient permissions' do
         staff = create(:staff)
         project = create(:project)
-        staff.groups.create!(projects: [project], role: create(:role, permissions: {}))
+        Membership.create!(project: project, role: build(:role, permissions: {}), group: staff.groups.create)
 
         expect(subject).not_to permit(staff, project)
       end

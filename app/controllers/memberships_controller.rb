@@ -13,6 +13,18 @@ class MembershipsController < ApplicationController
     head :ok
   end
 
+  api :PUT, '/projects/:project_id/groups/:group_id', 'Update the role of a membership'
+  param :project_id, :number, 'ID of Project to add group membership to', required: true
+  param :group_id, :number, 'ID of Group to associate with the project', required: true
+  param :role_id, :number, 'ID of Role', required: true
+
+  def update
+    membership = Membership.find_by!(membership_params)
+    authorize(membership)
+    membership.update!(role: Role.find(params[:role_id]))
+    head :ok
+  end
+
   api :DELETE, '/projects/:project_id/groups/:group_id', 'Remove a group from a project'
   param :project_id, :number, required: true
   param :group_id, :number, required: true

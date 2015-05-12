@@ -11,8 +11,8 @@
 class Role < ActiveRecord::Base
   PERMISSIONS = %w(projects approvals memberships)
 
-  has_many :groups
-  has_many :projects, through: :groups
+  has_many :memberships
+  has_many :projects, through: :memberships
 
   validate :permissions_format_is_correct, if: :permissions
 
