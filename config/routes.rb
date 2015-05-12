@@ -168,6 +168,7 @@ Rails.application.routes.draw do
     show
     terribly-sorry-about-that
     users
+    wizard
   ).each do |path|
     get "/#{path}" => 'welcome#index'
     get "/#{path}/*path" => 'welcome#index'

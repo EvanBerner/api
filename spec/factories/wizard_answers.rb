@@ -17,7 +17,10 @@
 
 FactoryGirl.define do
   factory :wizard_answer do
-    text 'Ruby'
+    sequence :text do |n|
+      "The #{n.ordinalize} answer."
+    end
+
     tags_to_add %w(Ruby Linux)
     tags_to_remove %w(Windows Java PHP dotNet)
   end

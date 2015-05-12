@@ -11,5 +11,11 @@
 FactoryGirl.define do
   factory :wizard_question do
     text 'What programming language will be used?'
+
+    trait :with_answers do
+      after(:build) do |question, _|
+        question.wizard_answers = build_pair(:wizard_answer)
+      end
+    end
   end
 end

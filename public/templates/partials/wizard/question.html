@@ -1,0 +1,7 @@
+<h1>{{vm.question.text}}</h1>
+<form ng-submit="vm.nextQuestion()">
+  <select ng-model="vm.answer" ng-options="answer.text for answer in vm.question.wizard_answers"></select>
+  <input type="submit" value="{{vm.action}}"/>
+</form>
+
+Tags: {{vm.tags}}

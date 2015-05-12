@@ -12,6 +12,6 @@ class WizardQuestion < ActiveRecord::Base
   has_many :wizard_answers
 
   def next_question_id
-    self.class.find_by('id > ?', id).id
+    self.class.find_by('id > ?', id).try(:id)
   end
 end
