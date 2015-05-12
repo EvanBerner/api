@@ -28,7 +28,7 @@ class GroupsController < ApplicationController
 
   api :PUT, '/groups/:id', 'Updates group with :id'
   param :id, :number, required: true
-  param :name, String, desc: 'Group Name', required: true
+  param :name, String, desc: 'Group Name'
   param :description, String, desc: 'Group Description'
   param :staff_ids, Array
   error code: 404, desc: MissingRecordDetection::Messages.not_found
@@ -48,27 +48,6 @@ class GroupsController < ApplicationController
     group = Group.find(params[:id])
     group.destroy
     respond_with_params(group)
-  end
-
-  api :POST, '/projects/:project_id/groups', 'Adds a user to the group'
-  param :project_id, :number, required: true
-  error code: 404, desc: MissingRecordDetection::Messages.not_found
-
-  def join
-    group = Group.find(params[:group_id])
-    Project.find(params[:project_id]).groups << group
-    head :ok
-  end
-
-  api :DELETE, '/projects/:project_id/groups/:group_id', 'Remove a user from a group'
-  param :project_id, :number, required: true
-  param :group_id, :number, required: true
-  error code: 404, desc: MissingRecordDetection::Messages.not_found
-
-  def leave
-    group = Group.find(params[:group_id])
-    Project.find(params[:project_id]).groups.delete(group)
-    head :ok
   end
 
   private
