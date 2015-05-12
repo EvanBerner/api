@@ -13,7 +13,14 @@
   <ul id="groups-list">
     <li ng-attr-id="{{'group-' + group.id}}" class="group" ng-repeat="group in project.groups">
       {{group.name}}
-      <select ng-model="role"></select>
+      <ui-select ng-model="group.role" theme="selectize" ng-attr-id="{{'group-' + group.id + '-role'}}" on-select="setGroupRole($item, $model)">
+        <ui-select-match placeholder="Select a Role">{{$select.selected.name}}</ui-select-match>
+        <ui-select-choices repeat="role in allRoles | filter: $select.search">
+          <strong ng-bind-html="role.name | highlight: $select.search"></strong>
+          <span ng-bind-html="role.description | highlight: $select.search"></span>
+        </ui-select-choices>
+      </ui-select>
+
       <a href="#" ng-click="removeGroupFromProject(group)">x</a>
     </li>
   </ul>

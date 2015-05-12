@@ -37,5 +37,6 @@ window.apiRoutes = {
 
     "groups":            "/groups",
     "groupsById":        "/groups/:id",
+    "roles": "/roles",
   }
 };

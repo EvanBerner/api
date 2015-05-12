@@ -9,9 +9,10 @@ window.GroupsInput =  function() {
       scope: {
         project: "="
       },
-      controller: function($scope, UsersResource, GroupsResource, MembershipsResource) {
+      controller: function($scope, UsersResource, GroupsResource, MembershipsResource, RolesResource) {
         $scope.project.groups = $scope.project.groups || [];
         $scope.project.group_ids = $scope.project.group_ids || [];
+        $scope.allRoles = RolesResource.query();
         UsersResource.getCurrentMember({'includes[]': ['groups']}).$promise
           .then(function(currentUser) {
             if(currentUser.isAdmin()) {
@@ -56,6 +57,14 @@ window.GroupsInput =  function() {
             _.remove($scope.project.group_ids, group.id);
           }
         };
+
+        $scope.setGroupRole = function(role, group) {
+          MembershipsResource.update({
+            projectId: $scope.project.id,
+            groupId: group.id,
+            roleId: role.id,
+          });
+        }
       }
 
     };
