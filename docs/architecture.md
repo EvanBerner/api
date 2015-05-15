@@ -12,7 +12,7 @@ Both the Jellyfish API and Jellyfish UX are built on the Ruby on Rails framework
 
 * The Jellyfish API is a Ruby on Rails application that contains the back-end and the UX, or front-end  the work horse of Project Jellyfish.
 * It is a fully scalable REST server that powers the Jellyfish UX and Jellyfish Mobile.
-* _Jellyfish API requires Ruby 2.0.0 and PostgreSQL 9.3.x_
+* _Jellyfish API requires Ruby 2.2.x and PostgreSQL 9.4.x_
 
 
 
@@ -22,7 +22,6 @@ Both the Jellyfish API and Jellyfish UX are built on the Ruby on Rails framework
 * It provides an advanced interface for both end-users and admins.
 * For end-users it acts as a marketplace and self-service portal.
 * For admins, it allows the creation of a catalog of services that they would like to offer their end-users.
-* _Jellyfish UX requires Nodejs 0.10.x_
 
 
 
